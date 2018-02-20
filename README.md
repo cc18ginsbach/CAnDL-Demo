@@ -4,7 +4,7 @@
 
 This is a gui to demonstrate the Compiler Analysis Description Language (CAnDL). Please refer to [Philip Ginsbach, Lewis Crawford and Michael O’Boyle. CAnDL: A Domain Specific Language for Compiler Analysis. 27th ACM International Conference on Compiler Construction](https://www.conference-publishing.com/list.php?Event=CC18) for details.
 
-## Dependecies
+## Dependencies
 
 * everything required to build llvm and clang
 * ninja
