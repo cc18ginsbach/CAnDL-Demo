@@ -17,7 +17,8 @@ from gi.repository import Gtk
 from gi.repository import Pango
 from gi.repository import GtkSource
 
-BINARY_DIRECTORY   = "."+"/".join(sys.argv[0].split("/")[:-1])+"/"
+BINARY_DIRECTORY = "/".join(sys.argv[0].split("/")[:-1])
+BINARY_DIRECTORY = BINARY_DIRECTORY+"/" if BINARY_DIRECTORY else ""
 
 class TerminalWindow(Gtk.ScrolledWindow):
     def __init__(self):
