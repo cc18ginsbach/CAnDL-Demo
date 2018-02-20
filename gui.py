@@ -17,16 +17,13 @@ from gi.repository import Gtk
 from gi.repository import Pango
 from gi.repository import GtkSource
 
-BINARY_DIRECTORY   = "/".join(sys.argv[0].split("/")[:-1])+"/"
-SPECIFICATION_FILE = BINARY_DIRECTORY+"clang++"
-CLANGPP_EXECUTABLE = BINARY_DIRECTORY+"clang++"
+BINARY_DIRECTORY   = "."+"/".join(sys.argv[0].split("/")[:-1])+"/"
 
 class TerminalWindow(Gtk.ScrolledWindow):
     def __init__(self):
         Gtk.ScrolledWindow.__init__(self)
 
         self.box = Gtk.EventBox()
-
 
         self.box.modify_bg(Gtk.StateType.NORMAL, Gdk.Color.parse("#000000")[1]);
 
@@ -54,7 +51,6 @@ class TerminalWindow(Gtk.ScrolledWindow):
 
     def connect_to_stream(self, stream):
         threading.Thread(target=self.connect_to_stream_async, args=(stream,)).start()
-
 
 class ConstraintsView(GtkSource.View):
     def __init__(self):
