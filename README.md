@@ -7,7 +7,7 @@ This is a gui to demonstrate the Compiler Analysis Description Language (CAnDL).
 ## Dependencies
 
 * everything required to build llvm and clang
-* python with GTK bindings
+* python with GTK+ bindings
 * ninja
 * ghc
 * pypy
