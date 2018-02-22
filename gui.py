@@ -45,7 +45,7 @@ class TerminalWindow(Gtk.ScrolledWindow):
         self.get_vadjustment().set_value(self.get_vadjustment().get_upper())
 
     def connect_to_stream_async(self, stream):
-        for line in iter(lambda: stream.readline(), ''):
+        for line in iter(lambda: stream.readline().decode("utf8"), ''):
             Gdk.threads_enter()
             self.label.set_text(terminal.get_text()+"    "+line)
             Gdk.threads_leave()
@@ -140,7 +140,7 @@ class ConstraintsView(GtkSource.View):
         new_code = self.get_text()
 
         if new_code != self.code:
-            open(BINARY_DIRECTORY+"llvm/lib/CAnDLParser/IdiomSpecification.txt", "w").write(new_code)
+            open(BINARY_DIRECTORY+"llvm/lib/CAnDLParser/IdiomSpecification.txt", "w").write(new_code.encode("utf8"))
             self.code = new_code
 
 class CodeView(GtkSource.View):
@@ -154,16 +154,6 @@ class CodeView(GtkSource.View):
         self.set_show_line_numbers(True)
 
     def set_text(self, text):
-        width = 60
-        process = subprocess.Popen(["clang-format", "-style={BasedOnStyle: llvm,ColumnLimit: "+str(width)+"}"],
-                                   stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        terminal.set_text(terminal.get_text()+"Run clang-format over source code\n")
-        terminal.connect_to_stream(process.stderr)
-
-        process.stdin.write(text.encode("utf8"))
-        process.stdin.close()
-
         self.get_buffer().set_text(text)
 
         terminal.set_text(terminal.get_text()+"Done\n")
@@ -301,7 +291,7 @@ class SolutionView(Gtk.TreeView):
             return "..."
             
     def get_synopsis(self, solution):
-        if type(solution) is unicode:
+        if repr(type(solution)) in ["<type 'unicode'>", "<class 'str'>"]:
             return self.cut_down_line(solution)
         elif type(solution) is OrderedDict:
             if "input" in solution:
@@ -331,7 +321,7 @@ class SolutionView(Gtk.TreeView):
 
     def set_idom_at(self, iterator, text):
         for key in text:
-            if type(text[key]) is unicode:
+            if repr(type(text[key])) in ["<type 'unicode'>", "<class 'str'>"]:
                 self.treestore.append(iterator, [key, self.get_synopsis(text[key])])
             elif type(text[key]) is OrderedDict:
                 newiter = self.treestore.append(iterator, [key, self.get_synopsis(text[key])])
@@ -436,9 +426,9 @@ class RunButton(Gtk.HBox):
 
         terminal.connect_to_stream(process.stderr)
 
-        process.stdin.write(sourcecode)
+        process.stdin.write(sourcecode.encode("utf8"))
         process.stdin.close()
-        ir_code = process.stdout.read()
+        ir_code = process.stdout.read().decode("utf8")
 
         return_code = process.wait()
         if return_code == 0:
@@ -536,7 +526,7 @@ class CompilerOptionWidget(Gtk.VBox):
         self.menuitem_AddIncludes = Gtk.MenuItem("Add Include Path")
         self.menuitem_RemIncludes = Gtk.MenuItem("Remove Include Path")
         self.submenu_Compiler.append(self.menuitem_Compile)
-        self.submenu_Compiler.append(self.menuitem_Language)
+#        self.submenu_Compiler.append(self.menuitem_Language)
         self.submenu_Compiler.append(self.menuitem_AddIncludes)
         self.submenu_Compiler.append(self.menuitem_RemIncludes)
         self.menu_Compiler.set_submenu(self.submenu_Compiler)
@@ -694,7 +684,7 @@ class CompilerOptionWidget(Gtk.VBox):
             old_path = "/".join(self.filename.split("/")[:-1])
             self.set_include_paths([folder for folder in self.get_include_paths() if folder != old_path])
             self.filename     = None
-            self.set_command_line()
+            self.code_window.set_text("")
 
     def on_click_undo(self, button):
         if self.code_window.is_focus():

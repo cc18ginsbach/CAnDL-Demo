@@ -6,11 +6,11 @@ This is a gui to demonstrate the Compiler Analysis Description Language (CAnDL).
 
 ## Dependencies
 
-* everything required to build llvm and clang
-* python with GTK+ bindings
-* ninja
-* ghc
-* pypy
+* Everything required to build [llvm and clang](https://llvm.org/docs/GettingStarted.html#software)
+* [Python 2.7](https://www.python.org) with [GTK+3 bindings](http://python-gtk-3-tutorial.readthedocs.io/en/latest/install.html)
+* [ninja](https://ninja-build.org)
+* [ghc](https://www.haskell.org/ghc)
+* [pypy](https://pypy.org)
 
 ## Installation
 
@@ -39,6 +39,8 @@ As a result of running _Compiler->Compile_, LLVM IR will appear in the _compiler
 By default, the program will look for polyhedral [SCoPs](http://perso.ens-lyon.fr/christophe.alias/impact2011/impact-07.pdf).
 
 To run different analysis routines than SCoPs, modify the _Experiment_ specification in the _constraint specifications_ tab.
+
+![Screenshot of CAnDL GUI](/candl_gui_screenshot.jpg?raw=true "CAnDL GUI")
 
 ## Contact
 
