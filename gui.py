@@ -140,7 +140,7 @@ class ConstraintsView(GtkSource.View):
         new_code = self.get_text()
 
         if new_code != self.code:
-            open(BINARY_DIRECTORY+"llvm/lib/CAnDLParser/IdiomSpecification.txt", "w").write(new_code.encode("utf8"))
+            open(BINARY_DIRECTORY+"llvm/lib/CAnDLParser/IdiomSpecification.txt", "w").write(new_code)
             self.code = new_code
 
 class CodeView(GtkSource.View):
