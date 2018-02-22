@@ -496,10 +496,10 @@ class CompilerOptionWidget(Gtk.VBox):
         self.menuitem_Save   = Gtk.MenuItem("Save")
         self.menuitem_SaveAs = Gtk.MenuItem("Save As")
         self.menuitem_Close  = Gtk.MenuItem("Close")
-        self.submenu_File.append(self.menuitem_New)
+#        self.submenu_File.append(self.menuitem_New)
         self.submenu_File.append(self.menuitem_Open)
-        self.submenu_File.append(self.menuitem_Save)
-        self.submenu_File.append(self.menuitem_SaveAs)
+#        self.submenu_File.append(self.menuitem_Save)
+#        self.submenu_File.append(self.menuitem_SaveAs)
         self.submenu_File.append(self.menuitem_Close)
         self.menu_File.set_submenu(self.submenu_File)
 
