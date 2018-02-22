@@ -40,7 +40,7 @@ By default, the program will look for polyhedral [SCoPs](http://perso.ens-lyon.f
 
 To run different analysis routines than SCoPs, modify the _Experiment_ specification in the _constraint specifications_ tab.
 
-![Screenshot of CAnDL GUI](/candl_gui_screenshot.jpg?raw=true "CAnDL GUI")
+![Screenshot of CAnDL GUI](https://github.com/cc18ginsbach/CAnDL-Demo/raw/master/candl_gui_screenshot-2.jpg?raw=true "CAnDL GUI")
 
 ## Contact
 
